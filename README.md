@@ -1,14 +1,53 @@
 # News_Stance_Detection
 Stance Detection in News articles using only textual features.
 
-To run: 
-python3 run.py
+**Pre-requisites** *(You need to download following and place (unzipped) under the root directory)*
 
-Recommended for faster execution: Download pre-generated word-embeddings and features, link: https://drive.google.com/drive/folders/1GqfriXYoMk15j12cSfXQ6Vmc-pZYgIBU?usp=sharing
+1. You can download the dataset from [download_dataset]() and place it in a folder named 'data' under the root directory.
+2. Download Pre-trained Google News word2vec model from here [Pre-trained Google News model](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing) and place it(unzipped bin file) in root directory
+3. Download pre-generated feature vectors for different approaches from here [download_pregenerated_feature_vectors](https://drive.google.com/file/d/1nkfF5YYVV7EkxeufnaVg4qX-O91Dx_pW/view?usp=sharing) and place under the root directory.
 
-To try out different approaches change folowing values:
+We highly recommend to use the pre-generated feature vectors (mentioned in step 3 above) as generating these features may take a long time. If you still want to generate these files you change the default config to generate it, steps are given later in this document.
 
-To run with pre-generated word embeddingss (Google News): set 'pretrained_flag' = 1 (line 133) and 'word2vec_flag' = 1 (line 134) in run.py
-To run with Tf-Idf and using a saved model: set 'pretrained_flag' = 1 (line 133) and 'word2vec_flag' = 0 (line 134) in run.py
-To generate word-embeddings and use them (): set 'pretrained_flag' = 0 (line 133) and 'word2vec_flag' = 0 (line 134) in run.py
-To use pre-generated word embedding (with no data-preprocessing): choose (uncomment) 'data_source' = "word_embedding_with_no_preprocessing/" in line(107) and comment out all other 'data_source initialization' (line 106 and 108)
+The code includes multiple approaches to address the News Stance Detection problem. Follow the steps below to change configurations to run different approaches.
+
+**How to run?**
+
+[approach_1.py](approach_1.py) includes the baseline model (By default uses pre-generated word-embeddings (recommended). To change to generate word-embeddings go to line 272 in approach_1.py and change to 'pretrained_flag = 0')
+
+[approach_2_and_3.py](approach_2_and_3.py): By default the code is configured to run the *Multi-Layer Perceptron* (MLP) model with pre-trained Google News word2Vec word-embeddings. To run different approaches you just need to change some flags in [approach_2_and_3.py](approach_2_and_3.py) file as following:
+
+**Using pre-generated word-vectors** (*recommended* as its much faster) (Make sure you have this zip folder (unzipped) under the same directory where [approach_2_and_3.py](approach_2_and_3.py) is)
+There are 4 flags in total that you can use to change configurations, these flags are *'pretrained_flag', 'word2vec_flag', 'data_source_id'*, and *'summarized_data_flag',* at the lines .. ... .. .. ..
+
+	**data_source_id = 1**, pretrained_flag = 1, word2vec_flag = 1	(Default) (Uses pre-generated word-embeddings with Multi-Layer Perceptron)
+	**data_source_id = 2**, pretrained_flag = 1, word2vec_flag = 1	(Uses summarized text sample dataset pre-generated vectors with MLP)
+	**data_source_id = 3**, pretrained_flag = 1, word2vec_flag = 1	(Uses word-embedding with no text-preprocessing with MLP)
+
+
+**Generating word-embeddings** (not recommended, as this may take hours to complete execution) (Pre-generated files can be downloaded from [here]() as already described earlier)
+
+	Change to *pretrained_flag = 0* and *word2vec_flag = 1* to generate word-embeddings using Google News pretrained word2vec model as input for the model
+	Change to *pretrained_flag = 0*, *word2vec_flag = 1* and *summarized_data_flag = 1* to use summarized article text with reduced dimensions with word-embeddings as input to the model
+
+Using Tf-Idf instead of word-embeddings:
+
+	Change to *word2vec_flag = 1* to generate tf-idf and use as input features instead of word-embeddings
+	
+
+
+**Requirements:**
+
+The code is written in python3.
+You need to have following libraries installed.
+
+tesorflow
+scikit learn
+gensim
+nltk
+numpy
+pandas
+scipy
+vaderSentiment
+
+
