@@ -16,7 +16,8 @@ The code includes multiple approaches to address the News Stance Detection probl
 
 [approach_2_and_3.py](approach_2_and_3.py): By default the code is configured to run the *Multi-Layer Perceptron* (MLP) model with pre-trained Google News word2Vec word-embeddings. To run different approaches you just need to change some flags in [approach_2_and_3.py](approach_2_and_3.py) file as following:
 
-#### Using pre-generated word-vectors (*recommended* as its much faster) (Make sure you have [pre-generated_vectors](https://drive.google.com/file/d/1nkfF5YYVV7EkxeufnaVg4qX-O91Dx_pW/view?usp=sharing) zip folder (unzipped) under the same directory where [approach_2_and_3.py](approach_2_and_3.py) is)
+#### Using pre-generated word-vectors (*recommended*) 
+(Make sure you have [pre-generated_vectors](https://drive.google.com/file/d/1nkfF5YYVV7EkxeufnaVg4qX-O91Dx_pW/view?usp=sharing) zip folder (unzipped) under the same directory where [approach_2_and_3.py](approach_2_and_3.py) is)
 There are 4 flags in total that you can use to change configurations, these flags are *'pretrained_flag', 'word2vec_flag', 'data_source_id'*, and *'summarized_data_flag',* at the lines 153, 154, 155 and 156 respectively
 
 - **data_source_id = 1**, pretrained_flag = 1, word2vec_flag = 1	(Default) (Uses pre-generated word-embeddings)
