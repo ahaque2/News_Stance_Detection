@@ -51,5 +51,7 @@ You need to have following libraries installed.
 - pandas
 - scipy
 - vaderSentiment
+- Keras
+- Tensorflow
 
 
