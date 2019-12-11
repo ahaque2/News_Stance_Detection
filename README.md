@@ -27,12 +27,12 @@ There are 4 flags in [approach_2_and_3.py](approach_2_and_3.py) that you can use
 
 #### Generating word-embeddings## (not recommended, as this may take hours to complete execution)
 
-- Change to *pretrained_flag = 0* and *word2vec_flag = 1* to generate word-embeddings using Google News pretrained word2vec model as input for the model
-- Change to *pretrained_flag = 0*, *word2vec_flag = 1* and *summarized_data_flag = 1* to use summarized article text with reduced dimensions with word-embeddings as input to the model
+- Change to **pretrained_flag = 0** and **word2vec_flag = 1** to generate word-embeddings using Google News pretrained word2vec model as input for the model
+- Change to **pretrained_flag = 0**, **word2vec_flag = 1** and **summarized_data_flag = 1** to use summarized article text with reduced dimensions with word-embeddings as input to the model
 
 Using Tf-Idf instead of word-embeddings:
 
-- Change to *word2vec_flag = 1* to generate tf-idf and use as input features instead of word-embeddings
+- Change to **word2vec_flag = 1** to generate tf-idf and use as input features instead of word-embeddings
 	
 
 
@@ -41,13 +41,13 @@ Using Tf-Idf instead of word-embeddings:
 The code is written in python3.
 You need to have following libraries installed.
 
--tesorflow
--scikit learn
--gensim
--nltk
--numpy
--pandas
--scipy
--vaderSentiment
+- tesorflow
+- scikit learn
+- gensim
+- nltk
+- numpy
+- pandas
+- scipy
+- vaderSentiment
 
 
