@@ -294,7 +294,7 @@ f = open('hedge_words.txt')
 hedge_words = f.readlines()
 hedge_words = [h.strip('\n') for h in hedge_words]
 
-pretrained_flag = 0
+pretrained_flag = 1
 
 if(pretrained_flag != 1): 
     

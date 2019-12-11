@@ -149,12 +149,10 @@ def get_data():
   
 file_predictions = 'data/predictions_test.csv'
 
-#When pretrained_flag is set to 1 will use pre-generated word-vector files, else will generate those feature file. (Note - Recommended to use the pre-granrated files as generating these files may take a long time)
-#When word2vec_flag is set to 1 the model uses word-embeddings for word vectorization otherwise uses tf-Idf (bag-of-words) model.
-pretrained_flag = 1
-word2vec_flag = 1  
-data_source_id = 1
-
+#Flags to change configuration to run different approaches
+pretrained_flag = 1     #Change to 0 to generate word-embedding instead of using pre-generated 
+word2vec_flag = 1       #Change to 1 to run with Tf-Idf instead of word-embeddings
+data_source_id = 1      #Choose appropriate data_source 
 summarized_data_flag = 0    #Change this flag to 1 if you wish to use the summarized text instead of full text dataset
 
 data_source = get_data_source(data_source_id)
