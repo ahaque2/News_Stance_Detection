@@ -16,6 +16,8 @@ The code includes multiple approaches to address the News Stance Detection probl
 
 [approach_2_and_3.py](approach_2_and_3.py): By default the code is configured to run the *Multi-Layer Perceptron* (MLP) model with pre-trained Google News word2Vec word-embeddings. To run different approaches you just need to change some flags in [approach_2_and_3.py](approach_2_and_3.py) file as following:
 
+[approach_4.ipynb and approach_5.ipynb](approach_4.ipynb and approach_5.ipynb) : Load both the python notebooks into google colab, switch to gpu model. Create a folder called 'Stance_detection' in your google drive and put the data folder inside that. Also upload the Pre-trained Google News word2vec model inside the 'Stance_detection' folder in google drive. Use the google colab to run the two approches.
+
 #### Using pre-generated word-vectors (*recommended*) 
 (Make sure you have [pre-generated_vectors](https://drive.google.com/file/d/1nkfF5YYVV7EkxeufnaVg4qX-O91Dx_pW/view?usp=sharing) zip folder (unzipped) under the same directory where [approach_2_and_3.py](approach_2_and_3.py) is)
 There are 4 flags in [approach_2_and_3.py](approach_2_and_3.py) that you can use to change configurations, these flags are ***'pretrained_flag', 'word2vec_flag', 'data_source_id'***, and ***'summarized_data_flag',*** at the lines ***153, 154, 155*** and ***156*** respectively
