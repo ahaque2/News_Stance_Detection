@@ -1,4 +1,3 @@
-# Import relevant packages and modules
 from csv import DictReader
 from csv import DictWriter
 import numpy as np
@@ -7,8 +6,6 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import tensorflow as tf
-import sys
-    
 
 
 # Initialise global variables
@@ -67,6 +64,9 @@ class FNCData:
                 self.heads[instance['Headline']] = head_id
             instance['Body ID'] = int(instance['Body ID'])
 
+        
+        
+        
         # Process bodies
         for body in bodies:
             self.bodies[int(body['Body ID'])] = body['articleBody']
@@ -162,7 +162,6 @@ def pipeline_train(train, test, lim_unigram):
     for i, elem in enumerate(heads + body_ids):
         id_ref[elem] = i
 
-    
     # Create vectorizers and BOW and TF arrays for train set
     bow_vectorizer = CountVectorizer(max_features=lim_unigram, stop_words=stop_words)
     bow = bow_vectorizer.fit_transform(heads + bodies)  # Train set only
@@ -194,12 +193,10 @@ def pipeline_train(train, test, lim_unigram):
             cos_track[(head, body_id)] = tfidf_cos
         else:
             tfidf_cos = cos_track[(head, body_id)]
-        
-        #print("Lengths ", len(head_tf), len(body_tf), len(tfidf_cos))
         feat_vec = np.squeeze(np.c_[head_tf, body_tf, tfidf_cos])
         train_set.append(feat_vec)
         train_stances.append(label_ref[instance['Stance']])
-            
+
     return train_set, train_stances, bow_vectorizer, tfreq_vectorizer, tfidf_vectorizer
 
 
@@ -268,7 +265,7 @@ def load_model(sess):
 
     """
 
-    saver = tf.compat.v1.train.Saver()
+    saver = tf.train.Saver()
     saver.restore(sess, './model/model.checkpoint')
 
 

@@ -2,22 +2,14 @@
 #
 # Author: Amanul Haque
 
-
-import corenlp
 import pandas as pd
 import numpy as np
 from os import listdir
 from os.path import isfile, join
-import sys
 from gensim.models import KeyedVectors
 import os
-from cleantext import clean
-import pprint
-import sys
-import itertools
 import nltk
 import re
-import ast
 from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 from nltk.stem import WordNetLemmatizer
@@ -27,10 +19,6 @@ from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 
-from Giveme5W1H.extractor.document import Document
-from Giveme5W1H.extractor.extractor import MasterExtractor
-import corenlp
-import os
 import math
 import statistics 
 
@@ -187,7 +175,7 @@ class get_word_embeddings:
             index = np.where(stance_id == bid)[0]
             article = np.array(self.get_tokenized_body_para1(txt))
             
-            hedge_word_counts = self.get_hedge_word_counts(article)
+            #hedge_word_counts = self.get_hedge_word_counts(article)
             lab = labels.iloc[index]
             heads = headlines.iloc[index]
             heads_tokenized = [self.preprocess(h) for h in heads]
@@ -233,8 +221,6 @@ class get_word_embeddings:
                     vec.append(top5_comp_senti)
                     #print("New Vec shape ", len(vec))
                     
-                    vec.append(hedge_word_counts)
-                    
                 else:
                     vec = np.zeros(305)
                     
@@ -259,39 +245,41 @@ class get_word_embeddings:
             
         for bid, txt in zip(article_id, article_body):
             index = np.where(stance_id == bid)[0]
-            #print("Article ", txt, type(txt))
-            article = txt[0:1000]
-            article = self.preprocess(article)
             
-            lab = labels.iloc[index]
-            heads = headlines.iloc[index]
-            heads_tokenized = [self.preprocess(h) for h in heads]
-            
-            #print("Headlines length ", len(heads_tokenized))
-            
-            head_vec = self.mean_vectorizor(model, heads_tokenized, 300)
-            article_vec =  self.mean_vectorizor(model, [article], 300)
-            
-            feature_vec = []
-            #print(article_vec.shape)
-            #print(head_vec.shape)
-            
-            from scipy import spatial
-            for h in head_vec:
-                s = 1 - spatial.distance.cosine(h, article_vec)
-                c = np.concatenate((h, s, article_vec), axis = None)
-                feature_vec.append(c)
-            
-            
-            #print("Feature Vector length ", len(feature_vec))
-              
-            df2 = pd.DataFrame(columns = ['stance_id', 'label', 'word_features'])
-            df2['stance_id'] = index
-            df2['label'] = np.array(lab)
-            df2['word_features'] = feature_vec
-            
-            df = df.append(df2, ignore_index = True)
-    
+            if(len(index) > 0):
+                #print("Article ", txt, type(txt))
+                article = txt[0:1000]
+                article = self.preprocess(article)
+                
+                lab = labels.iloc[index]
+                heads = headlines.iloc[index]
+                heads_tokenized = [self.preprocess(h) for h in heads]
+                
+                #print("Headlines length ", len(heads_tokenized))
+                
+                head_vec = self.mean_vectorizor(model, heads_tokenized, 300)
+                article_vec =  self.mean_vectorizor(model, [article], 300)
+                
+                feature_vec = []
+                #print(article_vec.shape)
+                #print(head_vec.shape)
+                
+                from scipy import spatial
+                for h in head_vec:
+                    s = 1 - spatial.distance.cosine(h, article_vec)
+                    c = np.concatenate((h, s, article_vec), axis = None)
+                    feature_vec.append(c)
+                
+                
+                #print("Feature Vector length ", len(feature_vec))
+                  
+                df2 = pd.DataFrame(columns = ['stance_id', 'label', 'word_features'])
+                df2['stance_id'] = index
+                df2['label'] = np.array(lab)
+                df2['word_features'] = feature_vec
+                
+                df = df.append(df2, ignore_index = True)
+        
         return df
         
     
@@ -311,7 +299,7 @@ class get_word_embeddings:
         labels = stance['Stance']
         headlines = stance['Headline']
         
-        df = self.get_features(article_id, article_body, stance_id, labels, headlines)
+        df = self.get_features2(article_id, article_body, stance_id, labels, headlines)
         #print("Shape of Final dataframe ", df.shape)
         df = df.drop(np.where(df.isna() == True)[0])
         #df.to_csv("combined_features/preprocessed.csv")
