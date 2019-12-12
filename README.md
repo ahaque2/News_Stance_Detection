@@ -12,7 +12,7 @@ The code includes multiple approaches to address the News Stance Detection probl
 
 ### How to run?
 
-[approach_1.py](approach_1.py) includes the baseline model (By default uses pre-generated word-embeddings (recommended). To change to generate word-embeddings go to line ***315*** in approach_1.py and change to ***'pretrained_flag = 0'***)
+[approach_1.py](approach_1.py) includes the baseline model (By default uses pre-generated word-embeddings (recommended). To change to generate word-embeddings go to line ***315*** in [approach_1.py](approach_1.py) and change to ***'pretrained_flag = 0'***)
 
 [approach_2_and_3.py](approach_2_and_3.py): By default the code is configured to run the *Multi-Layer Perceptron* (MLP) model with pre-trained Google News word2Vec word-embeddings. To run different approaches you just need to change some flags in [approach_2_and_3.py](approach_2_and_3.py) file as following:
 
