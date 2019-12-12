@@ -76,7 +76,20 @@ def remove_nans(X_train, y_train, X_test, y_test):
     return X_train, y_train, X_test, y_test
 
 
+def change_labels_to_numeric(labels):
+    
+    y = np.array([None] * labels.shape[0])
+    
+    y[np.where(labels == 'agree')[0]] = 0
+    y[np.where(labels == 'disagree')[0]] = 1
+    y[np.where(labels == 'discuss')[0]] = 2
+    y[np.where(labels == 'unrelated')[0]] = 3
+    
+    return y
+
 def load_pregenerated_features_vectors():
+    
+    print("Loading data ")
     
     data_source = "baseline_features/"
     trainX = data_source + "trainX.npy"
@@ -85,9 +98,14 @@ def load_pregenerated_features_vectors():
     testY = data_source + "testY.npy" 
 
     X_train, y_train = np.load(trainX), np.load(trainY)
-    X_test, y_test = np.load(testX), np.load(testY)    
+    X_test, y_test = np.load(testX), np.load(testY)   
+    
+    y_train = change_labels_to_numeric(y_train)
+    y_test = change_labels_to_numeric(y_test)
     
     X_train, y_train, X_test, y_test = reshape_arrays(X_train, y_train, X_test, y_test)
+    print(X_train.shape, y_train.shape, X_test.shape, y_test.shape)
+    
     X_train, y_train, X_test, y_test = remove_nans(X_train, y_train, X_test, y_test)
     X_train, y_train, X_test, y_test = reshape_arrays(X_train, y_train, X_test, y_test)  
     
@@ -331,8 +349,8 @@ np.save(d + 'testY.npy', y_test)
 
 #clf = tree.DecisionTreeClassifier()
 #clf = MultinomialNB()
-#clf = neighbors.KNeighborsClassifier(9)
-clf = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0, max_depth=1, random_state=0).fit(X_train, y_train)
+clf = neighbors.KNeighborsClassifier(9)
+#clf = GradientBoostingClassifier(n_estimators=10, learning_rate=1.0, max_depth=1, random_state=0).fit(X_train, y_train)
 #clf = svm.SVC(gamma='scale')
 #clf = LinearSVC(random_state=0, tol=1e-5)
 
