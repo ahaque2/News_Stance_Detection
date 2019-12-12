@@ -1,4 +1,4 @@
-# News_Stance_Detection
+## Fake News Identification using Stance Detection
 Stance Detection in News articles using textual features.
 
 ### Pre-requisites **(You need to download the following and place (unzipped) under the root directory)**
