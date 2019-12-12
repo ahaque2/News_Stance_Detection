@@ -1,7 +1,7 @@
-## Fake News Identification using Stance Detection
+# Fake News Identification using Stance Detection
 Stance Detection in News articles using textual features.
 
-### Pre-requisites **(You need to download the following and place (unzipped) under the root directory)**
+### Pre-requisites **(You should download the following and place (unzipped) under the root directory)**
 
 1. Download Pre-trained Google News word2vec model from here [Pre-trained Google News model](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing) and place it(unzipped bin file) in root directory
 2. Download pre-generated feature vectors for different approaches from here [download_pregenerated_feature_vector_zip](https://drive.google.com/file/d/1nkfF5YYVV7EkxeufnaVg4qX-O91Dx_pW/view?usp=sharing) and place (unzipped) under the root directory.
