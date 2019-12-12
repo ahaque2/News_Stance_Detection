@@ -42,16 +42,15 @@ Using Tf-Idf instead of word-embeddings:
 The code is written in **python3**.
 You need to have following libraries installed.
 
-- tesorflow
-- scikit learn
-- gensim
-- nltk
-- numpy
-- pandas
-- scipy
-- vaderSentiment
+- Tesorflow
 - Keras
-- Tensorflow
+- Scikit learn
+- Gensim
+- Nltk
+- Numpy
+- Pandas
+- Scipy
+- VaderSentiment
 
 In case you have any difficulty executing our code, or notice a missing file (or any other thing in general) feel free to contact either of us and we will be happy to help.
 - Amanul Haque [ahaque2@ncsu.edu](ahaque2@ncsu.edu)

@@ -89,14 +89,14 @@ def change_labels_to_numeric(labels):
 
 def load_pregenerated_features_vectors():
     
-    print("Loading data ")
+    print("Loading data")
     
     data_source = "baseline_features/"
     trainX = data_source + "trainX.npy"
     trainY = data_source + "trainY.npy"
     testX = data_source + "testX.npy"
     testY = data_source + "testY.npy" 
-
+    
     X_train, y_train = np.load(trainX), np.load(trainY)
     X_test, y_test = np.load(testX), np.load(testY)   
     
@@ -306,7 +306,7 @@ def get_Xy(df, features):
     
     return X, y
 
-model = KeyedVectors.load_word2vec_format('../../word_embedings/GoogleNews-vectors-negative300.bin', binary=True)
+model = None
 
 f = open('hedge_words.txt')
 hedge_words = f.readlines()
@@ -317,6 +317,8 @@ pretrained_flag = 1
 if(pretrained_flag != 1): 
     
     print("Loading Data ")
+    model = KeyedVectors.load_word2vec_format('../../word_embedings/GoogleNews-vectors-negative300.bin', binary=True)
+
     train_article_id, train_article_body, train_stance_id, train_labels, train_headlines = load_dataset("data/train_bodies.csv", "data/train_stances.csv")
     test_article_id, test_article_body, test_stance_id, test_labels, test_headlines = load_dataset("data/test_bodies.csv", "data/test_stances.csv")
         
@@ -337,20 +339,10 @@ print("Testing set shapes ", X_test.shape, y_test.shape)
 unique, counts = np.unique(y_test, return_counts=True)
 print("Data distribution in test set ", dict(zip(unique, counts)))
 
-print("Training set shapes : ", X_train.shape, y_train.shape)
-print("Testing set shapes ", X_test.shape, y_test.shape)
-
-
-d = 'baseline_features/'
-np.save(d + 'trainX.npy', X_train)
-np.save(d + 'trainY.npy', y_train)
-np.save(d + 'testX.npy', X_test)
-np.save(d + 'testY.npy', y_test)
-
 #clf = tree.DecisionTreeClassifier()
 #clf = MultinomialNB()
-clf = neighbors.KNeighborsClassifier(9)
-#clf = GradientBoostingClassifier(n_estimators=10, learning_rate=1.0, max_depth=1, random_state=0).fit(X_train, y_train)
+#clf = neighbors.KNeighborsClassifier(9)
+clf = GradientBoostingClassifier(n_estimators=10, learning_rate=1.0, max_depth=1, random_state=0).fit(X_train, y_train)
 #clf = svm.SVC(gamma='scale')
 #clf = LinearSVC(random_state=0, tol=1e-5)
 
